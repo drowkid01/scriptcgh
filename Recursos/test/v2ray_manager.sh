@@ -1891,6 +1891,7 @@ main(){
 		continuar
 		read foo
 	}
+
 	while :
 	do
 		_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")

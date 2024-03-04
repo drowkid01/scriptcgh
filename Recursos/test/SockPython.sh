@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#!/bin/bash
 source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/colores)
 msg -bar
 ADM_inst="/etc/VPS-MX" && [[ ! -d ${ADM_inst} ]] && exit
@@ -332,7 +330,7 @@ STATUS_RESP = '$response'
 FTAG = '\r\nContent-length: 0\r\n\r\nHTTP/1.1 200 Connection established\r\n\r\n'
 
 if STATUS_RESP == '101':
-    STATUS_TXT = '<font color="green">Web Socket Protocol</font>'
+    STATUS_TXT = '<font color="green">Websocket Protocol</font>'
 else:
     STATUS_TXT = '<font color="red">Connection established</font>'
 
@@ -597,7 +595,7 @@ PYTHON
 
 msg -bar
 #systemctl start $py.$porta_socket &>/dev/null
-chmod +x ${ADM_inst}/$1.py
+chmod +x ${ADM_inst}/protocolos/$1.py
 
 echo -e "[Unit]
 Description=$1 Parametizado Service by @drowkid01
@@ -608,7 +606,7 @@ StartLimitIntervalSec=0
 Type=simple
 User=root
 WorkingDirectory=/root
-ExecStart=/usr/bin/$py ${ADM_inst}/${1}.py $conf
+ExecStart=/usr/bin/$py ${ADM_inst}/protocolos/${1}.py $conf
 Restart=always
 RestartSec=3s
 
@@ -670,7 +668,7 @@ STATUS_RESP = '$response'
 FTAG = '\r\nContent-length: 0\r\n\r\nHTTP/1.1 $STATUS_RESP Connection established\r\n\r\n'
 
 if STATUS_RESP == '101':
-    STATUS_TXT = '<font color="green">Web Socket Protocol</font>'
+    STATUS_TXT = '<font color="green">Websocket Protocol</font>'
 else:
     STATUS_TXT = '<font color="red">Connection established</font>'
 
@@ -914,7 +912,6 @@ def main(host=LISTENING_ADDR, port=LISTENING_PORT):
     print "\033[0;34m�01"*8,"\033[1;32m PROXY PYTHON WEBSOCKET","\033[0;34m%01"*8,"\n"
     print "\033[1;33mIP:\033[1;32m " + LISTENING_ADDR
     print "\033[1;33mPORTA:\033[1;32m " + str(LISTENING_PORT) + "\n"
-    print "\033[0;34m�01"*10,"\033[1;32m DrowKid ADMcgh Plus","\033[0;34m�01\033[1;37m"*11,"\n"
     
     server = Server(LISTENING_ADDR, LISTENING_PORT)
     server.start()
