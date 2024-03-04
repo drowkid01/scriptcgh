@@ -1,6 +1,7 @@
 #!/bin/bash
-# estructura original: @Kalix1
-# mod pedorro by @drowkid01
+export system=$(cat -n /etc/issue |grep 1 |cut -d ' ' -f6,7,8 |sed 's/1//' |sed 's/      //')
+export version=$(echo $system|awk '{print $2}'|cut -d '.' -f1,2)
+
 
 c[0]='\e[0m'
 
@@ -14,7 +15,7 @@ if((${#c[0]}));then
   done
 fi
 
-msg () {
+msg() {
 #ACTULIZADOR
 versaoSCT='\e[1;93mVersion: \e[92m10X'
 local colors="${sdir[0]}/colors"
@@ -57,11 +58,11 @@ SEMCOR='\e[0m'
   -blak)echo -e "\e[1;30m$2\e[0m";;
   -bra)cor="${COLOR[0]}${SEMCOR}" && echo -e "${cor}${2}${SEMCOR}";;
   "-bar2"|"-bar")cor="\e[1;30m————————————————————————————————————————————————————" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
-  -tit)echo -e "\e[91m≪━━─━━─━─━─━─━─━━─━━─━─━─◈─━━─━─━─━─━━─━─━━─━─━━─━≫   \e[0m\n \e[2;97m\e[3;93m ❯❯❯❯ 𝙎𝘾𝙍𝙄𝙋𝙏 𝙈𝙊𝘿 𝙇𝘼𝘾𝘼𝙎𝙄𝙏𝘼𝙈𝙓 ❮❮❮❮  \033[0m \033[1;31m[\033[1;32m$vesaoSCT\n\e[91m≪━━─━─━━━─━─━─━─━─━━─━─━─◈─━─━─━─━─━━━─━─━─━━━─━─━≫   \e[0m" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
+  -tit)echo -ne "\e[91m≪━━─━━─━─━─━─━─━━─━━─━─━─◈─━━─━─━─━─━━─━─━━─━─━━─━≫   \e[0m\n \e[2;97m\e[3;93m ❯❯❯❯ 𝙎𝘾𝙍𝙄𝙋𝙏 𝙈𝙊𝘿 𝙇𝘼𝘾𝘼𝙎𝙄𝙏𝘼𝙈𝙓 ❮❮❮❮  \033[0m \033[1;31m[\033[1;32m$vesaoSCT\n\e[91m≪━━─━─━━━─━─━─━─━─━━─━─━─◈─━─━─━─━─━━━─━─━─━━━─━─━≫   \e[0m\n" && echo -ne "${SEMCOR}${cor}${SEMCOR}";;
  esac
 }
 
-fun_trans () {
+fun_trans() {
 local texto
 local retorno
 declare -A texto
@@ -81,7 +82,7 @@ fi
 rm ${sdir[0]}/texto-mx
 }
 
-menu_func () {
+menu_func() {
 local options=${#@}
 local array
 for((num=1; num<=$options; num++)); do
@@ -96,7 +97,7 @@ echo -ne "  $(msg -verd "\e[1;93m[\e[92m$num\e[93m]") $(msg -verm2 "➛ ") "
 done
 }
 
-selection_fun () {
+selection_fun() {
 local selection="null"
 local range
 for((i=0; i<=$1; i++)); do range[$i]="$i "; done
@@ -109,12 +110,13 @@ echo $selection
 }
 
 
-tittle () {
+tittle() {
 clear
-msg -bar
 msg -tit
 msg -bar
-[[ -n $1 ]] && print_center -ama "$1"&&msg -bar
+ [[ -n $1 ]] && {
+	print_center -ama "$1"&&msg -bar
+ }
 }
 
 in_opcion(){
@@ -211,5 +213,30 @@ del(){
   done
 }
 
+function aguarde() {
+[[ -e $(pwd)/check ]] && rm $(pwd)/check
+unset txt run
+txt=("$(echo $1|cut -d'|' -f1)" "$(echo $1|cut -d'|' -f2)")
+run="$2"
+sleep .1
+ helice() {
+	tput civis
+	eval $(${run}) &> check
+	while true ; do
+		for i in / - \\ \|; do
+			sleep .1
+			echo -ne "\e[1D$i"
+			[[ -s check ]] || return $?
+		done
+	done
+	tput cnorm
+ }
+	#echo -ne "\033[1;37m ${txt[1]} \033[1;32m.\033[1;32m.\033[1;33m.\033[1;31m. \033[1;33m"
+ msg -ne "${txt[0]}  " && echo -ne "\033[1;32m${txt[1]} .\033[1;32m.\033[1;33m.\033[1;31m. \033[1;33m"
+ helice
+ echo -ne "\e[1DOk"
+ [[ -e $(pwd)/check ]] && rm $(pwd)/check
+}
 
+#aguarde 'OPTIMIZANDO LOS RECURSOS|DEL SISTEMA' "$(echo -e {a..z}-file.txt|xargs mkdir)"
 
