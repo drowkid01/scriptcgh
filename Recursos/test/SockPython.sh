@@ -1,173 +1,7 @@
 #!/bin/bash
 
 #!/bin/bash
-
-# interfas de colores
-msg(){
-  COLOR[0]='\033[1;37m' #BRAN='\033[1;37m'
-  COLOR[1]='\e[31m' #VERMELHO='\e[31m'
-  COLOR[2]='\e[32m' #VERDE='\e[32m'
-  COLOR[3]='\e[33m' #AMARELO='\e[33m'
-  COLOR[4]='\e[34m' #AZUL='\e[34m'
-  COLOR[5]='\e[91m' #MAGENTA='\e[35m'
-  COLOR[6]='\033[1;97m' #MAG='\033[1;36m'
-  COLOR[7]='\e[36m' #teal='\e[36m'
-  COLOR[8]='\e[30m' #negro='\e[30m'
-  COLOR[9]='\033[34m' #blue='\033[1;34m'
-
-  NEGRITO='\e[1m'
-  SEMCOR='\e[0m'
-
-  case $1 in
-    -ne) cor="${COLOR[1]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}";;
-    -nazu) cor="${COLOR[6]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}";;
-    -nverd) cor="${COLOR[2]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}";;
-    -nama) cor="${COLOR[3]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}";;
-    -ama) cor="${COLOR[3]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -verm) cor="${COLOR[3]}${NEGRITO}[!] ${COLOR[1]}" && echo -e "${cor}${2}${SEMCOR}";;
-    -verm2) cor="${COLOR[1]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -verm3) cor="${COLOR[1]}" && echo -e "${cor}${2}${SEMCOR}";;
-    -teal) cor="${COLOR[7]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -teal2) cor="${COLOR[7]}" && echo -e "${cor}${2}${SEMCOR}";;
-    -blak) cor="${COLOR[8]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -blak2) cor="${COLOR[8]}" && echo -e "${cor}${2}${SEMCOR}";;
-    -azu) cor="${COLOR[6]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -blu) cor="${COLOR[9]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -blu1) cor="${COLOR[9]}" && echo -e "${cor}${2}${SEMCOR}";;
-    -verd) cor="${COLOR[2]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    -bra) cor="${COLOR[0]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
-    #-bar) cor="${COLOR[3]}=====================================================" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
-    -bar3|-bar2|-bar1|-bar)echo -e "${COLOR[3]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";;
-  esac
-}
-
-# centrado de texto
-print_center(){
-  if [[ -z $2 ]]; then
-    text="$1"
-  else
-    col="$1"
-    text="$2"
-  fi
-
-  while read line; do
-    unset space
-    x=$(( ( 54 - ${#line}) / 2))
-    for (( i = 0; i < $x; i++ )); do
-      space+=' '
-    done
-    space+="$line"
-    if [[ -z $2 ]]; then
-      msg -azu "$space"
-    else
-      msg "$col" "$space"
-    fi
-  done <<< $(echo -e "$text")
-}
-#print_center2(){
-#    local x
-#    local y
-#    #text="$*"
-#    text="$2"
-#    #x=$(( ($(tput cols) - ${#text}) / 2))
-#    x=$(( ( 54 - ${#text}) / 2))
-#    echo -ne "\E[6n";read -sdR y; y=$(echo -ne "${y#*[}" | cut -d';' -f1)
-#    #echo -e "\033[${y};${x}f$*"
-#    msg "$1" "\033[${y};${x}f$2"
-#}
-
-# titulos y encabesados
-title(){
-    clear
-    msg -bar
-    if [[ -z $2 ]]; then
-      print_center -azu "$1"
-    else
-      print_center "$1" "$2"
-    fi
-    msg -bar
- }
-
-# finalizacion de tareas
- enter(){
-  msg -bar
-  text="►► Presione enter para continuar ◄◄"
-  if [[ -z $1 ]]; then
-    print_center -ama "$text"
-  else
-    print_center "$1" "$text"
-  fi
-  read
- }
-
-# opcion, regresar volver/atras
-back(){
-    msg -bar
-    echo -ne "$(msg -verd " [0]") $(msg -verm2 ">") " && msg -bra "\033[1;41mVOLVER"
-    msg -bar
- }
-
-# menu maker (opciones 1, 2, 3,.....)
-menu_func(){
-  local options=${#@}
-  local array
-  for((num=1; num<=$options; num++)); do
-    echo -ne "$(msg -verd " [$num]") $(msg -verm2 ">") "
-    array=(${!num})
-    case ${array[0]} in
-      "-vd") echo -e "\033[1;33m[!]\033[1;32m ${array[@]:1}";;
-      "-vm") echo -e "\033[1;33m[!]\033[1;31m ${array[@]:1}";;
-      "-fi") echo -e "${array[@]:2} ${array[1]}";;
-      -bar|-bar2|-bar3|-bar4) echo -e "\033[1;37m${array[@]:1}\n$(msg ${array[0]})";;
-      *) echo -e "\033[1;37m${array[@]}";;
-    esac
-  done
- }
-
-# opcion de seleccion numerica
-selection_fun(){
-  local selection="null"
-  local range
-  if [[ -z $2 ]]; then
-    opcion=$1
-    col="-nazu"
-  else
-    opcion=$2
-    col=$1
-  fi
-  for((i=0; i<=$opcion; i++)); do range[$i]="$i "; done
-  while [[ ! $(echo ${range[*]}|grep -w "$selection") ]]; do
-    msg "$col" " Selecione una Opcion: " >&2
-    read selection
-    tput cuu1 >&2 && tput dl1 >&2
-  done
-  echo $selection
-}
-
-in_opcion(){
-  unset opcion
-  if [[ -z $2 ]]; then
-      msg -nazu " $1: " >&2
-  else
-      msg $1 " $2: " >&2
-  fi
-  read opcion
-  echo "$opcion"
-}
-
-in_opcion_down(){
-  dat=$1
-  length=${#dat}
-  cal=$(( 22 - $length / 2 ))
-  line=''
-  for (( i = 0; i < $cal; i++ )); do
-    line+='╼'
-  done
-  echo -e " $(msg -verm3 "╭$line╼[")$(msg -azu "$dat")$(msg -verm3 "]")"
-  echo -ne " $(msg -verm3 "╰╼")\033[37;1m> " && read opcion
-}
-
-
+source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/colores)
 msg -bar3
 ADM_inst="/etc/VPS-MX" && [[ ! -d ${ADM_inst} ]] && exit
 system=$(cat -n /etc/issue |grep 1 |cut -d ' ' -f6,7,8 |sed 's/1//' |sed 's/      //')
@@ -376,7 +210,7 @@ msg -bar3
         py="python3"
         IP=$(fun_ip)
     elif [[ $conect = "PGet" ]]; then
-        echo "master=DrowKid" > ${ADM_tmp}/pwd.pwd
+        echo "master=LaCasitaMOD" > ${ADM_tmp}/pwd.pwd
         while read service; do
             [[ -z $service ]] && break
             echo "127.0.0.1:$(echo $service|cut -d' ' -f2)=$(echo $service|cut -d' ' -f1)" >> ${ADM_tmp}/pwd.pwd
@@ -445,7 +279,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/python.$porta_socket.service
     if [[ $conect = "PGet" ]]; then
         [[ "$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}')" ]] && {
             print_center -verd "Gettunel Iniciado com Exito"
-            print_center -azu   "Su Contrase�a Gettunel es: $(msg -ama "DrowKid")"
+            print_center -azu   "Su Contrase�a Gettunel es: $(msg -ama "LaCasitaMOD")"
             msg -bar3
         } || {
             print_center -verm2 "Gettunel no fue iniciado"
@@ -1147,7 +981,7 @@ case ${selection} in
 	read -p "PRESIONE ENTER PARA RETORNAR"
 	exit
 	} || {
-	if wget -O /bin/WS-Epro https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/binarios/SockWS/autoStart &>/dev/null ; then
+	if wget -O /bin/WS-Epro https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/binarios/SockWS/autoStart &>/dev/null ; then
 	  chmod 777 /bin/WS-Epro
 	fi
     mod1 "${conect}" 

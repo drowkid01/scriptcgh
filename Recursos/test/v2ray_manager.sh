@@ -1,6 +1,6 @@
 #!/bin/bash
 config="/etc/v2ray/config.json"
-
+source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/colores)
 #echo -ne "\033[1;32m[ INST \033[1;31m + \033[1;32mWORK ] "
 
 _v2=`if netstat -tunlp | grep v2ray 1> /dev/null 2> /dev/null; then

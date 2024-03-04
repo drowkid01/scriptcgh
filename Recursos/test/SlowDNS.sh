@@ -5,77 +5,9 @@ clear
 #ADM_inst="/ADMcgh/slow/dnsi" && [[ ! -d ${ADM_inst} ]] && mkdir ${ADM_inst}
 [[ ! -d /etc/VPS-MX/slow/ ]] && mkdir /etc/VPS-MX/slow
 ADM_slow="/etc/VPS-MX/slow/dnsi" && [[ ! -d ${ADM_slow} ]] && mkdir ${ADM_slow}
-Key="$(cat /etc/cghkey)" && _Key='/etc/cghkey'
-[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg > /dev/null || source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg) > /dev/null 
+source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/colores)
 #${mbar2} ## #${mbar2} ## #${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ## #${mbar2} ## #${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ## #${mbar2} ## #${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ##
 #${mbar2} ## #${mbar2} ## #${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ## #${mbar2} ## #${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ## #${mbar2} ## #${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ###${mbar2} ##
-
-#FELICIDADES, NUNCA DEJES DE APRENDER
-
-_Key='/etc/cghkey'
-
-clear
-
-[[ ! -e ${_Key} ]] && exit 
-
-clear
-function chekKEY {
-[[ -z ${IP} ]] && IP=$(cat < /bin/ejecutar/IPcgh)
-[[ -z ${IP} ]] && IP=$(wget -qO- ifconfig.me)
-Key="$(cat /etc/cghkey)"
-IiP="$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
-[[ -e /file ]] && _double=$(cat < /file) ||  {
-wget -q -O /file https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt
-_double=$(cat < /file)
-}
-_check2="$(echo -e "$_double" | grep ${IiP})"
-[[ ! -e /etc/folteto ]] && {
-wget --no-check-certificate -O /etc/folteto $IiP:81/DrowKid/checkIP.log
-cheklist="$(cat /etc/folteto)"
-echo -e "$(echo -e "$cheklist" | grep ${IP})" > /etc/folteto
-}
-[[ -z ${_check2} ]] && {
-[[ ! -d /bin/ejecutar/Ubam ]] && mkdir /bin/ejecutar/Ubam
-mss_='\n BotGEN NO AUTORIZADO POR @drowkid01 '
-
-cat <<EOF >/bin/menu
-clear && clear
-echo -e "\n\n\033[1;31m==================================================\n ¡¡ 🚫 KEY BANEADA  🚫 ! CONTACTE Su ADMINISTRADOR! \n==================================================\n ¡¡ FECHA DE BANEO :$(date +%d/%m/%Y) HORA :$(date +%H:%M:%S) \n==================================================\n\n¡¡ ${mss_} \n\n==================================================\n"
-echo -e " \e[1;32m     --- SI CONSIDERA QUE FUE UN ERROR  ---  " | pv -qL 60
-echo -e " \e[1;32m     -- ${mss_} --  " | pv -qL 60
-echo -e "\n \e[1;93m           --- TECLEA  \e[1;93m --- \e[1;97mcgh -fix\e[1;93m ---  " | pv -qL 50
-echo -e "\n\033[1;31m==================================================\n\n"
-#echo "/etc/VPS-MX/menu" > /bin/menu && chmod +x /bin/menu
-EOF
-rm -f /etc/folteto
-mv etc/adm-lite/* /bin/ejecutar/Ubam
- 			MENSAJE="${TTini}${m3ssg}MSG RECIVIDO${m3ssg}${TTfin}\n"
-			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+=" IP Clon: ${IP} Rechazada\n"
-			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+=" ${lLaM} DETECCUION EN SlowDNS ${lLaM}\n"
-			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+=" KEY : ${Key}\n"
-			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+="       ${rUlq} Bot generador de key ${rUlq}\n"
-			MENSAJE+="           ${pUn5A} By @drowkid01 ${pUn5A} \n"
-			MENSAJE+=" ---------------------------------------------\n"	
-			curl -s --max-time 10 -d "chat_id=$ID&disable_web_page_preview=1&text=$(echo -e "$MENSAJE")" $urlBOT &>/dev/null 	
-exit && exit
-}
-}
-
-selection_fun () {
-local selection="null"
-local range
-for((i=0; i<=$1; i++)); do range[$i]="$i "; done
-while [[ ! $(echo ${range[*]}|grep -w "$selection") ]]; do
-echo -ne "\033[1;37m ${flech} Selecione una Opcion: " >&2
-read selection
-tput cuu1 >&2 && tput dl1 >&2
-done
-echo $selection
-}
 
 
 info(){
@@ -185,7 +117,7 @@ info(){
   if [[ ! -e ${ADM_inst}/dns-server ]]; then    
   msg -ama " Descargando binario...." 
   [[ $(uname -m 2> /dev/null) != x86_64 ]] && {
-  if wget -O ${ADM_inst}/dns-server https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/binarios/SlowDNS/autoStart-ARM &>/dev/null ; then
+  if wget -O ${ADM_inst}/dns-server https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/binarios/SlowDNS/autoStart-ARM &>/dev/null ; then
   chmod +x ${ADM_inst}/dns-server    
   msg -verd "[OK]"    
   else    
@@ -197,7 +129,7 @@ info(){
   exit 0    
   fi
   } || {   
-  if wget -O ${ADM_inst}/dns-server https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/binarios/SlowDNS/autoStart-x86-64 &>/dev/null ; then
+  if wget -O ${ADM_inst}/dns-server https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/binarios/SlowDNS/autoStart-x86-64 &>/dev/null ; then
   chmod +x ${ADM_inst}/dns-server    
   msg -verd "[OK]"    
   else    
@@ -295,7 +227,7 @@ info(){
   
   remove_slow(){
   stop_slow
-  rm -rf /ADMcgh/slow/*
+  rm -rf /etc/VPS-MX/slow/*
   }
 
 while true; do
@@ -304,7 +236,7 @@ while true; do
 [[ $(ps x | grep dns-server | grep -v grep) ]] && MT=$(msg -verd "ACTIVO!!!" ) || MT=$(msg -verm "INACTIVO!!!")
   msg -bar
   tittle
-  msg -ama "         INSTALADOR SLOWDNS | @drowkid01${p1t0}Plus"
+  msg -ama "         INSTALADOR SLOWDNS | @botlatmx"
   msg -bar #
   echo -e " SlowDNS +" "${PRT} ""->" "${PT}"  "| ESTADO -> ${MT}"
   msg -bar
@@ -336,26 +268,3 @@ msg -bar
   esac  
 done
 
-ofus () {
-unset txtofus
-number=$(expr length $1)
-for((i=1; i<$number+1; i++)); do
-txt[$i]=$(echo "$1" | cut -b $i)
-case ${txt[$i]} in
-".")txt[$i]="x";;
-"x")txt[$i]=".";;
-"5")txt[$i]="s";;
-"s")txt[$i]="5";;
-"1")txt[$i]="@";;
-"@")txt[$i]="1";;
-"2")txt[$i]="?";;
-"?")txt[$i]="2";;
-"4")txt[$i]="0";;
-"0")txt[$i]="4";;
-"/")txt[$i]="K";;
-"K")txt[$i]="/";;
-esac
-txtofus+="${txt[$i]}"
-done
-echo "$txtofus" | rev
-}

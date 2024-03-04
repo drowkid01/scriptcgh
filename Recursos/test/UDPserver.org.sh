@@ -1,5 +1,6 @@
 #!/bin/bash  
 
+source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/colores)
 os_system(){ 
  system=$(cat -n /etc/issue |grep 1 |cut -d ' ' -f6,7,8 |sed 's/1//' |sed 's/      //') 
  distro=$(echo "$system"|awk '{print $1}') 

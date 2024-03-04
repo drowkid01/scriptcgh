@@ -1,4 +1,5 @@
 #!/bin/sh
+
 clear
 config="/etc/xray/config.json"
 configLOCK="/etc/xray/config.json.lock"

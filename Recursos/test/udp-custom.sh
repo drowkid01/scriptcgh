@@ -145,7 +145,7 @@ pausa
 download_udpServer(){
 	msg -nama '     Descargando binario UDPserver V 1.2 ----'
 [[ $(uname -m 2> /dev/null) != x86_64 ]] && {
-	if wget -O /bin/UDP-Custom 'https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/binarios/UDP/udp-arm64.bin' &>/dev/null ; then
+	if wget -O /bin/UDP-Custom 'https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/binarios/UDP/udp-arm64.bin' &>/dev/null ; then
 		chmod +x /bin/UDP-Custom
 		msg -verd ' ARM64 - OK'
 	else
@@ -153,7 +153,7 @@ download_udpServer(){
 		rm -rf /bin/UDP-Custom*
 	fi
 } || {
-	if wget -O /bin/UDP-Custom 'https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/binarios/UDP/udp-amd64.bin' &>/dev/null ; then
+	if wget -O /bin/UDP-Custom 'https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/binarios/UDP/udp-amd64.bin' &>/dev/null ; then
 		chmod +x /bin/UDP-Custom
 		msg -verd ' X64 OK'
 	else
@@ -162,7 +162,7 @@ download_udpServer(){
 fi	
 }
 	msg -nama '         Descargando Config UDPserver -------'
-	if wget -O /etc/VPS-MX/config.json 'https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/binarios/UDP/config.json' &>/dev/null ; then
+	if wget -O /etc/VPS-MX/config.json 'https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/binarios/UDP/config.json' &>/dev/null ; then
 		chmod 644 /etc/VPS-MX/config.json
 		msg -verd 'OK'
 	else
