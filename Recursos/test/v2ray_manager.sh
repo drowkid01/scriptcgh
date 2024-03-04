@@ -110,18 +110,18 @@ usrCONEC() {
 unset Users USERauth users UConc
 v2ray clean &> /dev/null && let log0++ && clear 
 }
-msg -bar3
+msg -bar
 echo -e ""
 echo -e " ESPERANDO A LA VERIFICACION DE IPS Y USUARIOS "
 echo -e "      ESPERE UN MOMENTO PORFAVOR $log0"
 echo -e ""
-msg -bar3
+msg -bar
 fun_bar
-msg -bar3
+msg -bar
 sleep 5s
 clear&&clear
 title2
-msg -bar3
+msg -bar
 users="$(cat $config | jq -r .inbounds[].settings.clients[].email)"
 IP_tconex=$(netstat -nap | grep "$v2rayports"| grep v2ray | grep ESTABLISHED | grep tcp6 | awk {'print $5'}| awk -F ":" '{print $1}' | sort | uniq)
 #IP_tconex=$(netstat -nap | grep "$v2rayports"| grep v2ray | grep ESTABLISHED | awk {'print $5'} | awk -F ":" '{print $1}' | sort | uniq)
@@ -133,7 +133,7 @@ do
 	Users+="$USERauth\n"
 done
 echo -e " N) -|- USER -|- CONEXIONES "|column -t -s '-'
-msg -bar3
+msg -bar
 for U in $users
 	do
 	CConT=$(echo -e "$Users" | grep $U |wc -l)
@@ -142,7 +142,7 @@ for U in $users
 	let n++
 done
 echo -e "$UConc"|column -t -s '-'
-msg -bar3
+msg -bar
 continuar
 read foo
 }
@@ -152,9 +152,9 @@ sudo apt-get install software-properties-common -y
 add-apt-repository universe
 apt update -y; apt upgrade -y
 clear
-msg -bar3
+msg -bar
 echo -e "\033[92m        -- INSTALANDO PAQUETES NECESARIOS -- "
-msg -bar3
+msg -bar
 #bc
 [[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] || apt-get install bc -y &>/dev/null
 [[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
@@ -247,9 +247,9 @@ sudo gem install lolcat &>/dev/null
 [[ $(dpkg --get-selections|grep -w "lolcat"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
 echo -e "\033[97m  # apt-get install lolcat............... $ESTATUS "
 
-msg -bar3
+msg -bar
 echo -e "\033[92m La instalacion de paquetes necesarios a finalizado"
-msg -bar3
+msg -bar
 echo -e "\033[97m Si la instalacion de paquetes tiene fallas"
 echo -ne "\033[97m Puede intentar de nuevo [s/n]: "
 read inst
@@ -279,15 +279,15 @@ restore(){
 	num=1
 	title "	   Lista de Respaldos creados"
 	blanco "	      nom  \033[0;31m| \033[1;37mfechas \033[0;31m|  \033[1;37mhora"
-	msg -bar3
+	msg -bar
 	for i in $(ls $backdir); do
 		col "$num)" "$i"
 		_res[$num]=$i
 		let num++
 	done
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco " cual desea restaurar?" 0
 	read opcion
 
@@ -324,12 +324,12 @@ restore(){
 	else
 		blanco " /data/v2ray.crt..." && rojo "[fail]"
 		blanco " /data/v2ray.key..." && rojo "[fail]"
-		msg -bar3
+		msg -bar
 		echo -e "VALIDA TU CERTIFICADO SSL "
 		v2ray tls 
 	fi
 	rm -rf $tmpdir
-	msg -bar3
+	msg -bar
 	continuar
 	read foo
 }
@@ -346,7 +346,7 @@ server(){
 		screen -dmS online http-server /etc/v2r/back/ --port 95 -s
 		title "	Respaldos en linea"
 		col "su url:" "http://$(wget -qO- ipv4.icanhazip.com):95"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 	else
@@ -450,29 +450,29 @@ v2rayports=$(echo $v2rayports | awk {'print $1'})
 _tconex=$(netstat -nap | grep "$v2rayports" | grep v2ray | grep ESTABLISHED| grep tcp6 | awk {'print $5'} | awk -F ":" '{print $1}' | sort | uniq | wc -l)
 	v1='10X'
 	v2='10X'
-	msg -bar3
+	msg -bar
 	[[ $v1 = $v2 ]] && echo -e "   \e[97m\033[1;44m MENU V2RAY LITE [$v1] POWER BY @drowkid01 \033[0m" || echo -e " \e[97m\033[1;44m MENU V2RAY LITE POWER BY @drowkid01 [$v1] >> \033[1;92m[$v2] \033[0m"
 [[ ! -z $v2rayports ]] && echo -e "       \e[97m\033[1;44mPUERTO ACTIVO :\033[0m \033[3;32m$v2rayports\033[0m   \e[97m\033[1;44m ACTIVOS:\033[0m \033[3;32m\e[97m\033[1;41m $_tconex " ||  echo -e "  \e[97m\033[1;41mERROR A INICIAR V2RAY : \033[0m \033[3;32m FAIL\033[3;32m"
 	}
 
 title(){
-	msg -bar3
+	msg -bar
 	blanco "$1"
-	msg -bar3
+	msg -bar
 }
 
 userDat(){
 	blanco "	N°    Usuarios 		  fech exp   dias"
-	msg -bar3
+	msg -bar
 }
 
 #============================================
 domain_check() {
 	ssl_install_fun
     clear
-    msg -bar3
+    msg -bar
     echo -e "   \033[1;49;37mgenerador de certificado ssl/tls\033[0m"
-    msg -bar3
+    msg -bar
     echo -e " \033[1;49;37mingrese su dominio (ej: midominio.com.ar)\033[0m"
     echo -ne ' \033[3;49;31m>>>\033[0m '
     read domain
@@ -488,15 +488,15 @@ domain_check() {
     do
     if [[ $(echo "${local_ip}" | tr '.' '+' | bc) -eq $(echo "${domain_ip}" | tr '.' '+' | bc) ]]; then
             clear
-            msg -bar3
+            msg -bar
             echo -e " \033[1;49;37mSu dominio: ${domain}\033[0m"
-            msg -bar3
+            msg -bar
             echo -e " \033[1;49;37mIP dominio:\033[0m  \033[1;49;32m${domain_ip}\033[0m"
             echo -e " \033[1;49;37mIP local:\033[0m    \033[1;49;32m${local_ip}\033[0m"
-            msg -bar3
+            msg -bar
             echo -e "      \033[1;49;32mComprovacion exitosa\033[0m"
             echo -e " \033[1;49;37mLa IP de su dominio coincide\n con la IP local, desea continuar?\033[0m"
-            msg -bar3
+            msg -bar
             echo -ne " \033[1;49;37msi o no [S/N]:\033[0m "
             read opcion
             case $opcion in
@@ -506,15 +506,15 @@ domain_check() {
             esac
     else
             clear
-            msg -bar3
+            msg -bar
             echo -e " \033[1;49;37mSu dominio: ${domain}\033[0m"
-            msg -bar3
+            msg -bar
             echo -e " \033[1;49;37mIP dominio:\033[0m  \033[3;49;31m${domain_ip}\033[0m"
             echo -e " \033[1;49;37mIP local:\033[0m    \033[3;49;31m${local_ip}\033[0m"
-            msg -bar3
+            msg -bar
             echo -e "      \033[3;49;31mComprovacion fallida\033[0m"
             echo -e " \033[4;49;97mLa IP de su dominio no coincide\033[0m\n         \033[4;49;97mcon la IP local\033[0m"
-            msg -bar3
+            msg -bar
             echo -e " \033[1;49;36m> Asegúrese que se agrego el registro"
             echo -e "   (A) correcto al nombre de dominio."
             echo -e " > Asegurece que su registro (A)"
@@ -522,7 +522,7 @@ domain_check() {
             echo -e "   adiccional y que solo resuelva DNS."
             echo -e " > De lo contrario, V2ray no se puede"
             echo -e "   utilizar normalmente...\033[0m"
-            msg -bar3
+            msg -bar
             echo -e " \033[1;49;37mdesea continuar?"
             echo -ne " si o no [S/N]:\033[0m "
             read opcion
@@ -540,7 +540,7 @@ port_exist_check() {
     while :
     do
     clear
-    msg -bar3
+    msg -bar
     echo -e " \033[1;49;37mPara la compilacion del certificado"
     echo -e " se requiere que los siguientes puerto"
     echo -e " esten libres."
@@ -548,7 +548,7 @@ port_exist_check() {
     echo -e " este script intentara detener"
     echo -e " cualquier proseso que este"
     echo -e " usando estos puertos\033[0m"
-    msg -bar3
+    msg -bar
     echo -e " \033[1;49;37mdesea continuar?"
     echo -ne " [S/N]:\033[0m "
     read opcion
@@ -557,9 +557,9 @@ port_exist_check() {
         [Ss]|[Yy])         
                     ports=('80' '443')
                     clear
-                        msg -bar3
+                        msg -bar
                         echo -e "      \033[1;49;37mcomprovando puertos...\033[0m"
-                        msg -bar3
+                        msg -bar
                         sleep 0.2
                         for i in ${ports[@]}; do
                             [[ 0 -eq $(lsof -i:$i | grep -i -c "listen") ]] && {
@@ -568,7 +568,7 @@ port_exist_check() {
                                 echo -e "    \033[3;49;31m$i [fail]\033[0m"
                             }
                         done
-                        msg -bar3
+                        msg -bar
                         for i in ${ports[@]}; do
                             [[ 0 -ne $(lsof -i:$i | grep -i -c "listen") ]] && {
                                 echo -ne "       \033[1;49;37mliberando puerto $i...\033[1;49;37m "
@@ -593,13 +593,13 @@ ssl_install() {
 
     if [[ -f "/data/v2ray.key" || -f "/data/v2ray.crt" ]]; then
         clear
-        msg -bar3
+        msg -bar
         echo -e " \033[1;49;37mya existen archivos de certificados"
         echo -e " en el directorio asignado.\033[0m"
-        msg -bar3
+        msg -bar
         echo -e " \033[1;49;37mENTER para canselar la instacion."
         echo -e " 'S' para eliminar y continuar\033[0m"
-        msg -bar3
+        msg -bar
         echo -ne " opcion: "
         read ssl_delete
         case $ssl_delete in
@@ -613,14 +613,14 @@ ssl_install() {
     fi
 
     if [[ -f "$HOME/.acme.sh/${domain}_ecc/${domain}.key" || -f "$HOME/.acme.sh/${domain}_ecc/${domain}.cer" ]]; then
-        msg -bar3
+        msg -bar
         echo -e " \033[1;49;37mya existe un almacer de certificado"
         echo -e " bajo este nombre de dominio\033[0m"
-        msg -bar3
+        msg -bar
         echo -e " \033[1;49;37m'ENTER' cansela la instalacion"
         echo -e " 'D' para eliminar y continuar"
         echo -e " 'R' para restaurar el almacen crt\033[0m"
-        msg -bar3
+        msg -bar
         echo -ne " opcion: "
         read opcion
         case $opcion in
@@ -653,20 +653,20 @@ ssl_install_fun() {
 
 acme() {
     clear
-    msg -bar3
+    msg -bar
     echo -e " \033[1;49;37mcreando nuevos certificado ssl/tls\033[0m"
-	#msg -bar3
+	#msg -bar
 #	read -p " Ingrese correo Para Validar el acme SSL : " corrio
-	msg -bar3
+	msg -bar
 	wget -O -  https://get.acme.sh | sh -s email=$corrio
-    msg -bar3
+    msg -bar
     if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force --test; then
         echo -e "\n           \033[1;49;37mSSL La prueba del certificado\n se emite con éxito y comienza la emisión oficial\033[0m\n"
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         sleep 0.2
     else
         echo -e "\n \033[4;49;31mError en la emisión de la prueba del certificado SSL\033[0m"
-        msg -bar3
+        msg -bar
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
         stop=1
     fi
@@ -675,26 +675,26 @@ acme() {
 
     if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force; then
         echo -e "\n \033[1;49;37mSSL El certificado se genero con éxito\033[0m"
-        msg -bar3
+        msg -bar
         sleep 0.2
         [[ ! -d /data ]] && mkdir /data
         if "$HOME"/.acme.sh/acme.sh --installcert -d "${domain}" --fullchainpath /data/v2ray.crt --keypath /data/v2ray.key --ecc --force; then
-            msg -bar3
+            msg -bar
             mv $config $temp
             echo "cat $temp | jq '.inbounds[].streamSettings.tlsSettings += {certificates:[{certificateFile:\"/data/v2ray.crt\",keyFile:\"/data/v2ray.key\"}]}' | jq '.inbounds[] += {domain:\"$domain\"}' | jq '.inbounds[].streamSettings += {security:\"tls\"}' >> $config" | bash
             chmod 777 $config
             rm $temp
             restart_v2r
             echo -e "\n \033[1;49;37mLa configuración del certificado es exitosa\033[0m"
-            msg -bar3
+            msg -bar
             echo -e "      /data/v2ray.crt"
             echo -e "      /data/v2ray.key"
-            msg -bar3
+            msg -bar
             sleep 0.2
         fi
     else
         echo -e "\n \033[4;49;31mError al generar el certificado SSL\033[0m"
-        msg -bar3
+        msg -bar
         rm -rf "$HOME/.acme.sh/${domain}_ecc"
     fi
     fi
@@ -738,9 +738,9 @@ add_user(){
 		}
 		let n++
 	done
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NOMBRE DEL NUEVO USUARIO" 0
 	read opcion
 	[[ -z $opcion ]] && vacio && sleep 0.3 && continue
@@ -761,9 +761,9 @@ add_user(){
 	chmod 777 $config
 	rm $temp
 	clear
-	msg -bar3
+	msg -bar
 	blanco "	Usuario $opcion creado Exitosamente"
-	msg -bar3
+	msg -bar
 	restart_v2r
 	sleep 0.2
 	#fun_bar
@@ -779,9 +779,9 @@ add_user(){
 		tls=$(jq '.inbounds[].streamSettings.security' $config)
 		addip=$(wget -qO- ifconfig.me)
 		clear
-		msg -bar3
+		msg -bar
 		blanco " Usuario: $ps"
-		msg -bar3
+		msg -bar
 		col2 "Remarks:" "$ps"
 		col2 "Domain:" "$add" 
 		col2 "IP-Address:" "$addip"
@@ -794,13 +794,13 @@ add_user(){
 		col2 "security:" "none"
 		[[ ! $host = '' ]] && col2 "Host/SNI:" "$host"
 		[[ $net = '"grpc"' ]] && col2 "ServiceName:" "$path" || col2 "Path:" "$path"
-		msg -bar3
+		msg -bar
 		blanco "              VMESS LINK CONFIG"
-		msg -bar3
+		msg -bar
 		vmess
-		msg -bar3
+		msg -bar
 		echo -e "  ESTA CONFIG SOLO SE MUESTRA UNA VEZ AQUI \n SI QUIERES VOLVER A VERLA VE A LA OPCION 4 \n  Y BALLASE A LA BERGA PERRO :V"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 	#---------------------------------------------------------------------
@@ -828,9 +828,9 @@ renew(){
 			}
 		done
 		[[ -z ${user[1]} ]] && blanco "		No hay expirados"
-		msg -bar3
+		msg -bar
 		col "0)" "VOLVER"
-		msg -bar3
+		msg -bar
 		blanco "NUMERO DE USUARIO A RENOVAR" 0
 		read opcion
 
@@ -858,9 +858,9 @@ renew(){
 			chmod 777 $config
 			rm $temp
 			clear
-			msg -bar3
+			msg -bar
 			blanco "	Usuario ${user[$opcion]} renovado Exitosamente"
-			msg -bar3
+			msg -bar
 			restart_v2r
 			sleep 0.2
 		  }
@@ -937,9 +937,9 @@ dell_user(){
 		}
 		let n++
 	done
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUMERO DE USUARIO A ELIMINAR" 0
 	read opcion
 
@@ -966,10 +966,10 @@ dell_user(){
 			chmod 777 $config
 			rm $temp
 			clear
-			msg -bar3
+			msg -bar
 			#blanco "	Usuario $(jq .inbounds[].settings.clients[$opcion].email $config) eliminado"
 			blanco "	USUARIO ${_us} ELIMINADO EXITOSAMENTE !!"
-			msg -bar3
+			msg -bar
 			restart_v2r
 			}
 			sleep 0.2
@@ -1004,9 +1004,9 @@ fun_lock(){
 			let n++
 		}
 	done
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUMERO DE USUARIO A BLOQUEAR" 0
 	read opcion
 
@@ -1047,10 +1047,10 @@ fun_lock(){
 			chmod 777 $configLOCK
 			#read -p "PAUSE"
 			clear
-			msg -bar3
+			msg -bar
 			#blanco "	Usuario $(jq .inbounds[].settings.clients[$opcion].email $config) eliminado"
 			blanco " USUARIO ${user[$opcion]} NUM: ${opcion} ENVIADO AL LIMBOOOO !!"
-			msg -bar3
+			msg -bar
 			restart_v2r
 			}
 			sleep 0.2
@@ -1083,9 +1083,9 @@ fun_unlock(){
 			#}
 		done
 		[[ -z ${user[1]} ]] && blanco "		No hay bloqueados!!!"
-		msg -bar3
+		msg -bar
 		col "0)" "VOLVER"
-		msg -bar3
+		msg -bar
 		blanco "NUMERO DE USUARIO A DESBLOQUEAR" 0
 		read opcion
 
@@ -1112,9 +1112,9 @@ fun_unlock(){
 			chmod 777 $config
 			rm $temp
 			clear
-			msg -bar3
+			msg -bar
 			blanco " USUARIO ${user[$opcion]} RETIRADO DEL LIMBOOOOOOO!!"
-			msg -bar3
+			msg -bar
 			restart_v2r
 			sleep 0.2
 		  }
@@ -1124,12 +1124,12 @@ fun_unlock(){
 
 _lo_un(){
 clear
-msg -bar3
+msg -bar
 echo -e "\033[0;35m [${cor[2]}1\033[0;35m]\033[0;33m ${flech}\033[0;33m [!] BLOQUEAR USUARIO V2RAY "
 echo -e "\033[0;35m [${cor[2]}2\033[0;35m]\033[0;33m ${flech}\033[0;33m [!] DESBLOQUEAR USUARIO V2RAY "
-msg -bar3
+msg -bar
 echo -e " \033[0;35m[${cor[2]}0\033[0;35m]\033[0;33m ${flech} $(msg -bra "\033[1;43m[ Salir ]\e[0m")"
-msg -bar3 
+msg -bar 
 	selection=$(selection_fun 2)
 	case ${selection} in
 		1)
@@ -1173,9 +1173,9 @@ view_user(){
 			let n++
 		done
 
-		msg -bar3
+		msg -bar
 		col "0)" "VOLVER"
-		msg -bar3
+		msg -bar
 		blanco "VER DATOS DEL USUARIO" 0
 		read opcion
 
@@ -1195,9 +1195,9 @@ view_user(){
 		tls=$(jq '.inbounds[].streamSettings.security' $config)
 		addip=$(wget -qO- ifconfig.me)
 		clear
-		msg -bar3
+		msg -bar
 		blanco " Usuario: $ps"
-		msg -bar3
+		msg -bar
 		col2 "Remarks:" "$ps"
 		col2 "Domain:" "$add" 
 		col2 "IP-Address:" "$addip"
@@ -1210,11 +1210,11 @@ view_user(){
 		col2 "security:" "none"
 		[[ ! $host = '' ]] && col2 "Host/SNI:" "$host"
 		[[ $net = '"grpc"' ]] && col2 "ServiceName:" "$path" || col2 "Path:" "$path"
-		msg -bar3
+		msg -bar
 		blanco "              VMESS LINK CONFIG"
-		msg -bar3
+		msg -bar
 		vmess
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 	done
@@ -1231,13 +1231,13 @@ alterid(){
 	do
 		aid=$(jq '.inbounds[].settings.clients[0].alterId' $config)
 	clear
-	msg -bar3
+	msg -bar
 	blanco "        configuracion alterId"
-	msg -bar3
+	msg -bar
 	col2 "	alterid:" "$aid"
-	msg -bar3
+	msg -bar
 	col "x)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUEVO VALOR" 0
 	read opcion
 
@@ -1250,9 +1250,9 @@ alterid(){
 	chmod 777 $config
 	rm $temp
 	clear
-	msg -bar3
+	msg -bar
 	blanco "Nuevo AlterId fijado"
-	msg -bar3
+	msg -bar
 	restart_v2r
 	done
 }
@@ -1262,13 +1262,13 @@ port(){
 	do
 	port=$(jq '.inbounds[].port' $config)
 	clear
-	msg -bar3
+	msg -bar
 	blanco "       configuracion de puerto"
-	msg -bar3
+	msg -bar
 	col2 " Puerto:" "$port"
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUEVO PUERTO" 0
 	read opcion
 
@@ -1281,9 +1281,9 @@ port(){
 	chmod 777 $config
 	rm $temp
 	clear
-	msg -bar3
+	msg -bar
 	blanco "	Nuevo Puerto fijado"
-	msg -bar3
+	msg -bar
 	sleep 0.2
 	restart_v2r
 	done
@@ -1294,13 +1294,13 @@ address(){
 	do
 	add=$(jq '.inbounds[].domain' $config) && [[ $add = null ]] && add=$(wget -qO- ipv4.icanhazip.com)
 	clear
-	msg -bar3
+	msg -bar
 	blanco "       configuracion address"
-	msg -bar3
+	msg -bar
 	col2 "address:" "$add"
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUEVO ADDRESS" 0
 	read opcion
 
@@ -1312,9 +1312,9 @@ address(){
 	chmod 777 $config
 	rm $temp
 	clear
-	msg -bar3
+	msg -bar
 	blanco "Nuevo address fijado"
-	msg -bar3
+	msg -bar
 	restart_v2r
 	sleep 0.2
 	done
@@ -1325,13 +1325,13 @@ host(){
 	do
 	host=$(jq '.inbounds[].streamSettings.wsSettings.headers.Host' $config) && [[ $host = null ]] && host='sin host'
 	clear
-	msg -bar3
+	msg -bar
 	blanco "       configuracion Host"
-	msg -bar3
+	msg -bar
 	col2 "Host:" "$host"
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUEVO HOST" 0
 	read opcion
 
@@ -1342,9 +1342,9 @@ host(){
 	chmod 777 $config
 	rm $temp
 	clear
-	msg -bar3
+	msg -bar
 	blanco "Nuevo Host fijado"
-	msg -bar3
+	msg -bar
 	restart_v2r
 	sleep 0.2
 	done
@@ -1356,13 +1356,13 @@ path(){
 	net=$(jq '.inbounds[].streamSettings.network' $config)
 	[[ $net = '"grpc"' ]] && path=$(jq '.inbounds[].streamSettings.grpcSettings.serviceName'  $config) || path=$(jq '.inbounds[].streamSettings.wsSettings.path' $config)
 	clear
-	msg -bar3
+	msg -bar
 	blanco "       configuracion Path"
-	msg -bar3
+	msg -bar
 	col2 "path:" "$path"
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "NUEVO Path" 0
 	read opcion
 	[[ -z $opcion ]] && vacio && sleep 0.3 && break
@@ -1373,9 +1373,9 @@ path(){
 	chmod 777 $config
 	rm $temp
 	clear
-	msg -bar3
+	msg -bar
 	blanco "Nuevo path fijado"
-	msg -bar3
+	msg -bar
 	sleep 0.2
 	restart_v2r
 	done
@@ -1385,9 +1385,9 @@ crt_man(){
 	while :
 	do
 		clear
-		msg -bar3
+		msg -bar
 		blanco "configuracion de certificado manual"
-		msg -bar3
+		msg -bar
 
 		chek=$(jq '.inbounds[].streamSettings.tlsSettings' $config)
 		[[ ! $chek = {} ]] && {
@@ -1402,11 +1402,11 @@ crt_man(){
 			blanco "	certificado no instalado"
 		}
 
-		msg -bar3
+		msg -bar
 		col "1)" "ingresar nuevo crt"
-		msg -bar3
+		msg -bar
 		col "0)" "VOLVER"
-		msg -bar3
+		msg -bar
 		blanco "opcion" 0
 		read opcion
 
@@ -1414,43 +1414,43 @@ crt_man(){
 		[[ $opcion = 0 ]] && break
 
 		clear
-		msg -bar3
+		msg -bar
 		blanco "ingrese su archivo de certificado\n ej: /root/crt/certif.crt"
-		msg -bar3
+		msg -bar
 		blanco "crt" 0
 		read crts
 
 		clear
-		msg -bar3
+		msg -bar
 		blanco "	nuevo certificado"
-		msg -bar3
+		msg -bar
 		blanco "	$crts"
-		msg -bar3
+		msg -bar
 		blanco "ingrese su archivo key\n ej: /root/crt/certif.key"
-		msg -bar3
+		msg -bar
 		blanco "key" 0
 		read keys
 
 		clear
-		msg -bar3
+		msg -bar
 		blanco "	nuevo certificado"
-		msg -bar3
+		msg -bar
 		blanco "	$crts"
 		blanco "	$keys"
-		msg -bar3
+		msg -bar
 		blanco "ingrese su dominio\n ej: netfree.xyz"
-		msg -bar3
+		msg -bar
 		blanco "dominio" 0
 		read domi
 
 		clear
-		msg -bar3
+		msg -bar
 		blanco "verifique sus datos sean correctos!"
-		msg -bar3
+		msg -bar
 		blanco "	$crts"
 		blanco "	$keys"
 		blanco "	$domi"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 
@@ -1459,9 +1459,9 @@ crt_man(){
 		chmod 777 $config
 		rm $temp
 		clear
-		msg -bar3
+		msg -bar
 		blanco "nuevo certificado agregado"
-		msg -bar3
+		msg -bar
 		restart_v2r
 		sleep 0.2
 	done
@@ -1470,13 +1470,13 @@ crt_man(){
 install(){
 	clear
 	install_ini
-	msg -bar3
+	msg -bar
 	blanco "	Esta por intalar v2ray!"
 	source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/v2ray_manager.sh)
 	chmod +x /bin/v2r.sh
-	msg -bar3
+	msg -bar
 	blanco " La instalacion puede tener\n alguna fallas!\n por favor observe atentamente\n el log de intalacion,\n este podria contener informacion\n sobre algunos errores!\n estos deveras ser corregidos de\n forma manual antes de continual\n usando el script"
-	msg -bar3
+	msg -bar
 	sleep 0.2
 	blanco "Enter para continuar..."
 	read foo
@@ -1510,30 +1510,30 @@ clear&&clear
 	echo -e " \033[0;31mEsta opcion es aparte, para habilitar XRAY Install"
 	echo -e " Habilitaremos el modulo XRAY previo al V2RAY ya instalado \033[0m"
 		echo -e "  Accederas al pannel original si es la primera vez !!\n\033[0m"
-	msg -bar3
+	msg -bar
 	blanco " Deseas instalar el XRAY ? [S/N]" 0
 	read opcion
-	msg -bar3
+	msg -bar
 	case $opcion in
 		[Ss]|[Yy]) 
-					msg -bar3
+					msg -bar
 					[[ -e /bin/xr.sh ]] && xr.sh || {
 					xray
 					echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/xray_manager.sh)" > /bin/xr.sh
 					chmod +x /bin/xr.sh
 							clear
-							msg -bar3
+							msg -bar
 							blanco " Se ha agregado un autoejecutor en el Sector de Inicios Rapidos"
-							msg -bar3
+							msg -bar
 							blanco "	  Para Acceder al menu Rapido \n	     Utilize * xr.sh * !!!"
-							msg -bar3
+							msg -bar
 							echo -e "		\033[4;31mNOTA importante\033[0m"
 							echo -e " \033[0;31mSi deseas desabilitar esta opcion, apagala"
 							echo -e " Y te recomiendo, no alterar nada en este menu, para"
 							echo -e "             Evitar Errores Futuros"
 							echo -e "     ESTE ES UN DUPLICADO V2RAY CON MODULO XRAY"
 							echo -e " y causar problemas en futuras instalaciones.\033[0m"
-							msg -bar3
+							msg -bar
 							continuar
 							read foo
 					}
@@ -1545,34 +1545,34 @@ clear&&clear
 
 v2ray_tls(){
 	clear
-	msg -bar3
+	msg -bar
 	blanco "		certificado tls v2ray"
 	echo -e "Ingrese Correo Temporal o Fijo \n  Para Validar su Cerficicado SSL " 
 	read -p " Ejemplo > email=my@example.com : " -e -i $(date | md5sum | head -c15)@gmail.com crreo
-	msg -bar3
+	msg -bar
 	wget -O -  https://get.acme.sh | sh -s email=$crreo
 	v2ray tls
-	msg -bar3
+	msg -bar
 	continuar
 	read foo
 }
 
 v2ray_stream(){
 	clear
-	msg -bar3
+	msg -bar
 	blanco "	instalacion de protocolos v2ray"
-	msg -bar3
+	msg -bar
 	v2ray stream
-	msg -bar3
+	msg -bar
 	continuar
 	read foo
 }
 
 v2ray_menu(){
 	clear
-	msg -bar3
+	msg -bar
 	blanco "		MENU V2RAY"
-	msg -bar3
+	msg -bar
 	v2ray
 }
 
@@ -1594,12 +1594,12 @@ backups(){
 	col "3)" "\033[0;31mEliminiar Respaldos"
 	col "4)" "\033[1;34mRespaldo en linea $PID"
 	col "5)" "\033[1;33mRespaldos automatico $(on_off_res)"
-	msg -bar3
+	msg -bar
 	
 	col "6)" "\033[1;33m RESTAURAR Online PORT :81 "
-	msg -bar3
+	msg -bar
 	col "0)" "VOLVER"
-	msg -bar3
+	msg -bar
 	blanco "opcion" 0
 	read opcion
 
@@ -1631,7 +1631,7 @@ Una vez que se descarge tu Fichero, Escoje el BackOnline
 				 
    Luego de Restaurarlo, Vuelve Activar el TLS 
  Para Validar la Configuracion de tu certificao"
-msg -bar3
+msg -bar
 echo -n "INGRESE LINK Que Mantienes Online en GitHub, o VPS \n" 
 read -p "Pega tu Link : " url1
 wget -q -O $backdir/BakcOnline.tar $url1 && echo -e "\033[1;31m- \033[1;32mFile Exito!"  && restore || echo -e "\033[1;31m- \033[1;31mFile Fallo" && sleep 0.2
@@ -1649,10 +1649,10 @@ restablecer_v2r(){
 	echo -e " \033[0;31mEsto va a restablecer los\n ajustes predeterminados de v2ray"
 	echo -e " Se perdera ajuste previos,\n incluido los Usuarios\033[0m"
 		echo -e "  LUEGO DE ESTO, DEBERAS RECONFIGURAR TU METODO\n\033[0m"
-	msg -bar3
+	msg -bar
 	blanco "quiere continuar? [S/N]" 0
 	read opcion
-	msg -bar3
+	msg -bar
 	case $opcion in
 		[Ss]|[Yy]) 
 		v2ray new && rm -f ${configLOCK}
@@ -1709,12 +1709,12 @@ bbr(){
 	clear
 	title "		ACELERACION BBR"
 	blanco "	Esto activara la aceleracion\n	por defecto de su kernel.\n	no se modoficar nada del sistema."
-	msg -bar3
+	msg -bar
 	col "1)" "Acivar aceleracion"
 	col "2)" "quitar toda aceleracion"
-	msg -bar3
+	msg -bar
 	col "0)" "volver"
-	msg -bar3
+	msg -bar
 	blanco "opcion" 0
 	read opcion
 	case $opcion in
@@ -1735,32 +1735,32 @@ settings(){
 	while :
 	do
 	clear
-	msg -bar3
+	msg -bar
 	blanco "	  Ajustes e instalacion v2ray"
-	msg -bar3
+	msg -bar
 	col "1)" "CAMBIAR DOMINIO / IP"
 	col "2)" "CAMBIAR PUERTO "
 	col "3)" "CAMBIAR AlterId"
 	col "4)" "CAMBIAR HOST"
 	col "5)" "CAMBIAR PACH"
-	msg -bar3
+	msg -bar
 	col "6)" "AÑADIR CRT (script)"
 	col "7)" "AÑADIR CRT V2RAY NATIVO"
 	col "8)" "AÑADIR CERTIFICADO MANUAL"
-	msg -bar3
+	msg -bar
 	col "9)" "CAMBIAR PROTOCOLO V2RAY"
 	col "10)" "ENTRAR A V2RAY ORIGINAL"
 	col "11)" "RESTABLECER CONFIGURACION"
-	msg -bar3
+	msg -bar
 	col "12)" "BBR nativo del sistema"
 	col "13)" "INSTALL/REINSTALL V2RAY/XRAY"
-	msg -bar3
+	msg -bar
 	col "14)" "Conf. COPIAS DE SEGURIDAD"
-	msg -bar3
+	msg -bar
 	#col "15)" "HABILITAR MODULO XRAY ( V2ray )"
-	#msg -bar3
+	#msg -bar
 	col "0)" "REGRESAR"
-	msg -bar3
+	msg -bar
 	blanco "opcion" 0
 	read opcion
 
@@ -1794,18 +1794,18 @@ xray
 echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/xray_manager.sh)" > /bin/xr.sh
 chmod +x /bin/xr.sh
 		clear
-		msg -bar3
+		msg -bar
 		blanco " Se ha agregado un autoejecutor en el Sector de Inicios Rapidos"
-		msg -bar3
+		msg -bar
 		blanco "	  Para Acceder al menu Rapido \n	     Utilize * xr.sh * !!!"
-		msg -bar3
+		msg -bar
 		echo -e "		\033[4;31mNOTA importante\033[0m"
 		echo -e " \033[0;31mSi deseas desabilitar esta opcion, apagala"
 		echo -e " Y te recomiendo, no alterar nada en este menu, para"
 		echo -e "             Evitar Errores Futuros"
 		echo -e "     ESTE ES UN DUPLICADO V2RAY CON MODULO XRAY"
 		echo -e " y causar problemas en futuras instalaciones.\033[0m"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 }
@@ -1815,29 +1815,29 @@ enon(){
 echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/v2ray_manager.url.sh)" > /bin/v2r.sh
 chmod +x /bin/v2r.sh
 		clear
-		msg -bar3
+		msg -bar
 		blanco " Se ha agregado un autoejecutor en el Sector de Inicios Rapidos"
-		msg -bar3
+		msg -bar
 		blanco "	  Para Acceder al menu Rapido \n	     Utilize * v2r.sh * !!!"
-		msg -bar3
+		msg -bar
 		echo -e "		\033[4;31mNOTA importante\033[0m"
 		echo -e " \033[0;31mSi deseas desabilitar esta opcion, apagala"
 		echo -e " Y te recomiendo, no alterar nada en este menu, para"
 		echo -e "             Evitar Errores Futuros"
 		echo -e " y causar problemas en futuras instalaciones.\033[0m"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 }
 enoff(){
 rm -f /bin/v2r.sh
-		msg -bar3
+		msg -bar
 		echo -e "		\033[4;31mNOTA importante\033[0m"
 		echo -e " \033[0;31mSe ha Desabilitado el menu Rapido de v2r.sh"
 		echo -e " Y te recomiendo, no alterar nada en este menu, para"
 		echo -e "             Evitar Errores Futuros"
 		echo -e " y causar problemas en futuras instalaciones.\033[0m"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 }
@@ -1847,14 +1847,14 @@ enttrada () {
 	while :
 	do
 	clear
-	msg -bar3
+	msg -bar
 	blanco "	  Ajustes de Entrada Rapida de Menu v2ray"
-	msg -bar3
+	msg -bar
 	col "1)" "Habilitar v2r.sh, Como entrada Rapida"
 	col "2)" "Eliminar v2r.sh, Como entrada Rapida"
-	msg -bar3
+	msg -bar
 	col "0)" "Volver"
-	msg -bar3
+	msg -bar
 	blanco "opcion" 0
 	read opcion
 
@@ -1877,17 +1877,17 @@ restablecer_v2r
 main(){
 	[[ ! -e $config ]] && {
 		clear
-		msg -bar3
+		msg -bar
 		blanco " No se encontro ningun archovo de configracion v2ray"
-		msg -bar3
+		msg -bar
 		blanco "	  No instalo v2ray o esta usando\n	     una vercion diferente!!!"
-		msg -bar3
+		msg -bar
 		echo -e "		\033[4;31mNOTA importante\033[0m"
 		echo -e " \033[0;31mSi esta usando una vercion v2ray diferente"
 		echo -e " y opta por continuar usando este script."
 		echo -e " Este puede; no funcionar correctamente"
 		echo -e " y causar problemas en futuras instalaciones.\033[0m"
-		msg -bar3
+		msg -bar
 		continuar
 		read foo
 	}
@@ -1907,15 +1907,15 @@ main(){
 		col "4)" "VER DATOS DE USUARIOS \033[1;32m ( ${_v2Reg} )"
 		col "5)" "VER USUARIOS CONECTADOS"
 		col "b)" "LOCK/UNLOCK USUARIO \033[1;32m ( ${_v2LOCK} )"
-		msg -bar3
+		msg -bar
 		col "6)" "\033[1;33m AJUSTES V2RAY $_v2"
-		msg -bar3
+		msg -bar
 		col "7)" "\033[1;33mENTRAR CON \033[1;33mv2r.sh $enrap"
-		msg -bar3
+		msg -bar
 		col "8)" "\033[1;33mFIXEAR V2RAY ( SOLO USUARIOS )"
-		msg -bar3
+		msg -bar
 		col "0)" "SALIR \033[0;31m|| $(blanco "Respaldos a utomaticos") $(on_off_res)"
-		msg -bar3
+		msg -bar
 		blanco "opcion" 0
 		read opcion
 
