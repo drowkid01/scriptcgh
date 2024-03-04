@@ -362,7 +362,7 @@ if wget -O /bin/hysteria https://github.com/apernet/hysteria/releases/download/v
 fi
 sleep 4s && del 1
 msg -nama '     Descargando Motor JSON . . . . '
-if wget -O /etc/VPS-MX/HYSTERIA/config.json https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver-sh/config.json &>/dev/null ; then
+if wget -O /etc/VPS-MX/HYSTERIA/config.json https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/menu_inst/UDPserver-sh/config.json &>/dev/null ; then
 		chmod +x /etc/VPS-MX/HYSTERIA/config.json
 		sed -i "s/setobfs/${OBFS}/" /etc/VPS-MX/HYSTERIA/config.json
 		msg -verd ' OK'
@@ -373,7 +373,7 @@ fi
 sleep 4s && del 1
 msg -nama '     COMPILANDO GoLang AUTHSSH '
 #if wget -O /bin/authSSH https://raw.githubusercontent.com/DrowKid/ADMcgh/main/Plugins/authSSH &>/dev/null ; then
-if wget -O /bin/authSSH https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver-sh/authSSH &>/dev/null ; then
+if wget -O /bin/authSSH https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/menu_inst/UDPserver-sh/authSSH &>/dev/null ; then
 		chmod +x /bin/authSSH
 		msg -verd ' OK'
 	else
@@ -382,7 +382,7 @@ if wget -O /bin/authSSH https://raw.githubusercontent.com/emirjorge/Script-Z/mas
 fi
 sleep 4s && del 1
 msg -nama '     COMPILANDO BINARIO DE SYSTEMA . . . . '
-if wget -O /etc/VPS-MX/HYSTERIA/hysteria.service https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver-sh/hysteria.service &>/dev/null ; then
+if wget -O /etc/VPS-MX/HYSTERIA/hysteria.service https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/menu_inst/UDPserver-sh/hysteria.service &>/dev/null ; then
 		chmod +x /etc/VPS-MX/HYSTERIA/hysteria.service
 		systemctl disable hysteria.service &>/dev/null
 		#rm -f /etc/systemd/system/hysteria.service
@@ -594,8 +594,8 @@ unset port
   msg -bar3
   opcion=$(selection_fun 4)
   case $opcion in
-  1) source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver.org.sh) && exit;;
-  2) source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/udp-custom.sh) && exit;;
+  1) source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/UDPserver.org.sh) && exit;;
+  2) source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/udp-custom.sh) && exit;;
   3) [[ $(ps x | grep -w "/bin/hysteria"| grep -v grep) ]] && _menuH || _hysteria ;;
   4) [[ $(ps x | grep -w "/bin/Hysteria2"| grep -v grep) ]] && _menuH2 || _hysteria2 ;;
   0) exit;;

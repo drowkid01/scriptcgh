@@ -1472,7 +1472,7 @@ install(){
 	install_ini
 	msg -bar3
 	blanco "	Esta por intalar v2ray!"
-	source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/v2ray_manager.sh)
+	source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/v2ray_manager.sh)
 	chmod +x /bin/v2r.sh
 	msg -bar3
 	blanco " La instalacion puede tener\n alguna fallas!\n por favor observe atentamente\n el log de intalacion,\n este podria contener informacion\n sobre algunos errores!\n estos deveras ser corregidos de\n forma manual antes de continual\n usando el script"
@@ -1482,7 +1482,7 @@ install(){
 	read foo
 	config='/etc/v2ray/config.json'
     tmp='/etc/v2ray/temp.json'
-	source <(curl -sSL https://raw.githubusercontent.com/${gh}/v2ray.sh)
+	source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/v2ray.sh)
 echo '[Unit]
 Description=V2Ray Service
 After=network.target nss-lookup.target
@@ -1519,7 +1519,7 @@ clear&&clear
 					msg -bar3
 					[[ -e /bin/xr.sh ]] && xr.sh || {
 					xray
-					echo "source <(curl -sSL https://raw.githubusercontent.com/${gh}/xray_manager.sh)" > /bin/xr.sh
+					echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/xray_manager.sh)" > /bin/xr.sh
 					chmod +x /bin/xr.sh
 							clear
 							msg -bar3
@@ -1791,7 +1791,7 @@ settings(){
 _xray() {
 [[ -e /bin/xr.sh ]] && xr.sh || {
 xray
-echo "source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/xray_manager.sh)" > /bin/xr.sh
+echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/xray_manager.sh)" > /bin/xr.sh
 chmod +x /bin/xr.sh
 		clear
 		msg -bar3
@@ -1812,7 +1812,7 @@ chmod +x /bin/xr.sh
 }
 
 enon(){
-echo "source <(curl -sSL https://raw.githubusercontent.com/${gh}/v2ray_manager.url.sh)" > /bin/v2r.sh
+echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/v2ray_manager.url.sh)" > /bin/v2r.sh
 chmod +x /bin/v2r.sh
 		clear
 		msg -bar3

@@ -1479,9 +1479,9 @@ install(){
 	read foo
 	config='/etc/xray/config.json'
     tmp='/etc/xray/temp.json'
-	source <(curl -sL https://raw.githubusercontent.com/DrowKid/ADMRufu/main/Utils/xray/xray.sh)
+	#source <(curl -sL https://raw.githubusercontent.com/DrowKid/ADMRufu/main/Utils/xray/xray.sh)
 	#restart_v2r
-	echo "source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/xray_manager.sh)" > /bin/v2r.sh
+	echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/xray_manager.sh)" > /bin/v2r.sh
 	chmod +x /bin/r.sh
 }
 
@@ -1723,7 +1723,7 @@ settings(){
     done
 }
 enon(){
-echo "source <(curl -sSL  https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/xray_manager.sh)" > /bin/xr.sh
+echo "source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/test/xray_manager.sh)" > /bin/xr.sh
 chmod +x /bin/xr.sh
 		clear
 		msg -bar3
