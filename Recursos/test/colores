@@ -214,20 +214,29 @@ del(){
 }
 
 function aguarde() {
-        sleep .1
-        echo -e "SU VERSION DE UBUNTU ${vercion} ES SUPERIOR A 18.04 "
-        helice() {
-                fun_upgrade >/dev/null 2>&1 &
-                tput civis
-                while [ -d /proc/$! ]; do
-                        for i in / - \\ \|; do
-                                sleep .1
-                                echo -ne "\e[1D$i"
-                        done
-                done
-                tput cnorm
-        }
-        echo -ne "\033[1;37m OPTIMIZANDO Y \033[1;32mFIXEANDO \033[1;37mPYTHON \033[1;32m.\033[1;32m.\033[1;33m.\033[1;31m. \033[1;33m"
-        helice
-        echo -e "\e[1DOk"
+[[ -e $(pwd)/check ]] && rm $(pwd)/check
+unset txt run
+txt=("$(echo $1|cut -d'|' -f1)" "$(echo $1|cut -d'|' -f2)")
+run="$2"
+sleep .1
+ helice() {
+	tput civis
+	eval $(${run}) &> check
+	while true ; do
+		for i in / - \\ \|; do
+			sleep .1
+			echo -ne "\e[1D$i"
+			[[ -s check ]] || return $?
+		done
+	done
+	tput cnorm
+ }
+	#echo -ne "\033[1;37m ${txt[1]} \033[1;32m.\033[1;32m.\033[1;33m.\033[1;31m. \033[1;33m"
+ msg -ne "${txt[0]}  " && echo -ne "\033[1;32m${txt[1]} .\033[1;32m.\033[1;33m.\033[1;31m. \033[1;33m"
+ helice
+ echo -ne "\e[1DOk"
+ [[ -e $(pwd)/check ]] && rm $(pwd)/check
 }
+
+#aguarde 'OPTIMIZANDO LOS RECURSOS|DEL SISTEMA' "$(echo -e {a..z}-file.txt|xargs mkdir)"
+
