@@ -7,10 +7,10 @@ function chekKEY {
 [[ -z ${IP} ]] && IP=$(cat < /bin/ejecutar/IPcgh)
 [[ -z ${IP} ]] && IP=$(wget -qO- ifconfig.me)
 Key="$(cat /etc/cghkey)"
-_double=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt")
+_double=$(curl -sSL "https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Control/Control-Bot.txt")
 IiP="$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
 [[ -e /file ]] && _double=$(cat < /file) ||  {
-wget -q -O /file https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt
+wget -q -O /file https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Control/Control-Bot.txt
 _double=$(cat < /file)
 }
 _check2="$(echo -e "$_double" | grep ${IiP})"

@@ -2,12 +2,12 @@
 
 [[ -e /etc/adm-lite/ShellBot.sh ]] && rm /etc/adm-lite/ShellBot.sh 
 [[ -e /etc/adm-lite/ultimatebot ]] && rm /etc/adm-lite/ultimatebot 
-wget -q -O /etc/adm-lite/ShellBot.sh https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/usercodes/telebot-sh/ShellBot.sh && chmod +x /etc/adm-lite/ShellBot.sh > /dev/null
+wget -q -O /etc/adm-lite/ShellBot.sh https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/usercodes/telebot-sh/ShellBot.sh && chmod +x /etc/adm-lite/ShellBot.sh > /dev/null
 #wget -q -O /etc/adm-lite/ShellBot.sh https://raw.githubusercontent.com/ChumoGH/VPSbot/main/ShellBot.sh && chmod +x /etc/adm-lite/ShellBot.sh > /dev/null
 #wget -q -O /etc/adm-lite/ultimatebot https://www.dropbox.com/s/6hzvja2mhgknl02/ultimatebot && chmod +x /etc/adm-lite/ultimatebot > /dev/null
-wget -q -O /etc/adm-lite/ultimatebot https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/usercodes/telebot-sh/ultimatebot-ant.sh && chmod +x /etc/adm-lite/ultimatebot > /dev/null
+wget -q -O /etc/adm-lite/ultimatebot https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/usercodes/telebot-sh/ultimatebot-ant.sh && chmod +x /etc/adm-lite/ultimatebot > /dev/null
 #wget -q -O /etc/adm-lite/bot_codes https://www.dropbox.com/s/wj53654gm0lhuja/bot_codes && chmod +x /etc/adm-lite/bot_codes > /dev/null
-wget -q -O /etc/adm-lite/bot_codes https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/usercodes/telebot-sh/bot_codes-ant.sh && chmod +x /etc/adm-lite/bot_codes > /dev/null
+wget -q -O /etc/adm-lite/bot_codes https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/usercodes/telebot-sh/bot_codes-ant.sh && chmod +x /etc/adm-lite/bot_codes > /dev/null
 telegran_bot () {
 cd /etc/adm-lite
 if [[ "$(ps x | grep "ultimatebot" | grep -v "grep")" = "" ]]; then

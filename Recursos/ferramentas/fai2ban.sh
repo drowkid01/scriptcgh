@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg || source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg)
+[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg || source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/msg)
 
 failtwoban=$(dpkg -l | grep fail2ban | grep ii)
 apache=$(dpkg -l | grep apache2 | grep ii)

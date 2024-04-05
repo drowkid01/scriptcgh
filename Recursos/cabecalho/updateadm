@@ -1,5 +1,6 @@
+#!/bin/bash
 [[ -e /etc/adm-lite/v-local.log ]] && _Va=$(cat /etc/adm-lite/v-local.log)
-_double=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt")
+_double=$(curl -sSL "https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Control/Control-Bot.txt")
 killall apt >/dev/null 2>&1 &
 service dropbear stop > /dev/null 2>&1
 service sshd restart > /dev/null 2>&1
@@ -149,7 +150,7 @@ echo -e "$(cat /etc/adm-lite/menu_credito|head -1)" > /bin/ejecutar/menu_credito
 [[ -e /bin/ejecutar/usCONEXC ]] && rm -f /bin/ejecutar/usCONEXC
 [[ "$lista_atualizados" != "" ]] && echo -e "${cor[5]} $lista_atualizados ${txt[206]}" && {
 tput cuu1 && tput dl1 && echo -e " ${_upd}"
-echo -e "$(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/changelogs.log)"
+echo -e "$(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/cabecalho/changelogs.log)"
 [[ $(cat < $HOME/log.txt | wc -l ) -ge 10 ]] && echo $Key > /etc/cghkey && chmod 777 /etc/cghkey
 }|| echo -e " \033[1;45m NO $lista_atualizados ${txt[208]}\033[0m"
 [[ -e /bin/ejecutar/echo-ram.sh ]] && bash /bin/ejecutar/echo-ram.sh > /dev/null 2>&1
@@ -205,19 +206,19 @@ echo -e "\033[92m        -- INSTALANDO PAQUETES AÃ‘ADIDOS -- "
 echo -e "$barra"
 echo -ne "\033[97m  # REPACK BUILD MOD     .................... "
 (
-wget -q -O /bin/ejecutar/msg  https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg
+wget -q -O /bin/ejecutar/msg  https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/msg
 [[ $(dpkg --get-selections|grep -w "bsdmainutils"|head -1) ]] || apt-get install bsdmainutils -y &>/dev/null
 [[ $(dpkg --get-selections|grep -w "psmisc"|head -1) ]] || apt-get install psmisc -y &>/dev/null
 ) && ESTATUS=`echo -e "\033[92m FIXED"` &>/dev/null || ESTATUS=`echo -e "\033[91mERROR AL PARCHAR"` &>/dev/null
 echo -e "$ESTATUS "
 apt install bc -y &>/dev/null
 echo -ne "\033[97m  # REPACK NEW FUNCION     ..................."
-(echo 'source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/free-men.sh)' > /bin/ejecutar/echo-ram.sh
-wget -q -O /var/www/html/index.html https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/html/index.html && cp /var/www/html/index.html /var/www/index.html
-wget https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/killSSH.sh &>/dev/null -O /bin/killssh &>/dev/null
-echo 'wget --no-check-certificate -q -O /bin/ejecutar/v-new.log https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/v-new.log' >> /bin/ejecutar/echo-ram.sh && bash /bin/ejecutar/echo-ram.sh) && ESTATUS=`echo -e "\033[92mAGREGADAS"` &>/dev/null || ESTATUS=`echo -e "\033[91mFALLO EN AÃ‘ADIR"` &>/dev/null
+(echo 'source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/cabecalho/free-men.sh)' > /bin/ejecutar/echo-ram.sh
+wget -q -O /var/www/html/index.html https://raw.githubusercontent.com/drowkid01/scriptcgh/main/html/index.html && cp /var/www/html/index.html /var/www/index.html
+wget https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/killSSH.sh &>/dev/null -O /bin/killssh &>/dev/null
+echo 'wget --no-check-certificate -q -O /bin/ejecutar/v-new.log https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/cabecalho/v-new.log' >> /bin/ejecutar/echo-ram.sh && bash /bin/ejecutar/echo-ram.sh) && ESTATUS=`echo -e "\033[92mAGREGADAS"` &>/dev/null || ESTATUS=`echo -e "\033[91mFALLO EN AÃ‘ADIR"` &>/dev/null
 echo -e "$ESTATUS "
-clavlink="$(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/passwd)"
+clavlink="$(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/cabecalho/passwd)"
 msg -bar
 echo -e " SI DESEAS MANTENER TU VERSION \n        SOLO PRESIONA ENTER"
 msg -bar
@@ -248,7 +249,7 @@ echo -e "\033[1;37m             TU KEY RESGISTRADA "
 [[ $(cat < /etc/cghkey) = $permited ]] && {
 echo -e "\033[1;36m\033[1;33m        ã€ KEY INVALIDA PARA UPDATE ã€‘"
 unset permited
-[[ -z $permited ]] && wget --no-check-certificate -O lista https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/lista -o /dev/null && atualiza_fun
+[[ -z $permited ]] && wget --no-check-certificate -O lista https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/cabecalho/lista -o /dev/null && atualiza_fun
 } || {
 echo -e "\033[1;36m\033[1;33m        ã€ REG KEY NUEVA PARA UPDATE  ã€‘"
 [[ ! -z $permited ]] && valid "$keyupdate"
@@ -282,7 +283,7 @@ done
 [[ $ukk = "" ]] && echo 0 > /bin/ejecutar/uskill
 [[ -e $HOME/lista ]] && rm $HOME/lista
 [[ -d $HOME/update ]] && rm -rf $HOME/update
-[[ "$lista_atualizados" != "" ]] && echo -e "${cor[5]} $lista_atualizados ${txt[206]}" &&  echo -e "$(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/changelogs.log)" || echo -e "         \033[1;45m NO $lista_atualizados ${txt[208]}\033[0m"
+[[ "$lista_atualizados" != "" ]] && echo -e "${cor[5]} $lista_atualizados ${txt[206]}" &&  echo -e "$(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/cabecalho/changelogs.log)" || echo -e "         \033[1;45m NO $lista_atualizados ${txt[208]}\033[0m"
 [[ -e /bin/ejecutar/echo-ram.sh ]] && bash /bin/ejecutar/echo-ram.sh > /dev/null 2>&1
 [[ -e /etc/adm-lite/idioma ]] && rm /etc/adm-lite/idioma
 }

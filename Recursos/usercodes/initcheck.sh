@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg || source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg)
+[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg || source <(curl -sSL https://raw.githubusercontent.com/drowkid01/scriptcgh/main/msg-bar/msg)
 source /etc/adm-lite/cabecalho 
 #FUNCION DE SELECCION
 selection_fun () {
@@ -27,7 +27,7 @@ mportas(){
 }
 
 start(){
-[[ -e /bin/ejecutar/checkuser.py ]] || wget -q -O /bin/ejecutar/checkuser.py https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/usercodes/initcheck-sh/chekuser.py && chmod +x /bin/ejecutar/checkuser.py
+[[ -e /bin/ejecutar/checkuser.py ]] || wget -q -O /bin/ejecutar/checkuser.py https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/usercodes/initcheck-sh/chekuser.py && chmod +x /bin/ejecutar/checkuser.py
 	if [[ $(systemctl is-active chekuser) = "active" ]]; then
 		title 'DESABILITANDO CHEKUSER'
 		systemctl stop chekuser &>/dev/null
@@ -108,7 +108,7 @@ start(){
     fi
 
     print_center -ama 'Instalando check'
-    if wget -O /usr/bin/check https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/usercodes/initcheck-sh/check.sh &>/dev/null; then
+    if wget -O /usr/bin/check https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/usercodes/initcheck-sh/check.sh &>/dev/null; then
     	chmod +x /usr/bin/check
     	mkdir /etc/rec
     	del 1
@@ -167,7 +167,7 @@ _onli() {
 
 
    print_center -ama 'Instalando check'
-    if wget -O /usr/bin/onlineapp https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/usercodes/initcheck-sh/onlineapp.sh &>/dev/null; then
+    if wget -O /usr/bin/onlineapp https://raw.githubusercontent.com/drowkid01/scriptcgh/main/Recursos/usercodes/initcheck-sh/onlineapp.sh &>/dev/null; then
     	chmod +x /usr/bin/onlineapp
     	mkdir /etc/rec
     	del 1
