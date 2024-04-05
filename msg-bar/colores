@@ -199,32 +199,6 @@ del(){
   done
 }
 
-mportas() {
-unset portas
-portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
-while read port; do
-var1=$(echo $port | awk '{print $1}') && var2=$(echo $port | awk '{print $9}' | awk -F ":" '{print $2}')
-[[ "$(echo -e $portas|grep "$var1 $var2")" ]] || portas+="$var1 $var2\n"
-done <<< "$portas_var"
-i=1
-echo -e "$portas"
-}
-
-fun_bar3(){
-fun_bar "$@"
-}
-
-printext(){
-unset text length content
-local text=$@
-local length=${#text}
-function random(){ shuf -i 1-220 -n 1 ; }
-for((i=0;i<=$length;i++));do
-  content+="\e[38;5;$(random)m${text:$i:1}"
-done
-echo -ne "$content"
-}
-
 cor[0]="\033[0m"
 cor[1]="\033[1;34m"
 cor[2]="\033[1;32m"
