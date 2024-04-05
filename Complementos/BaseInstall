@@ -1,6 +1,4 @@
 #!/bin/bash
-#By @ChumoGH|Plus}
-
 
 [[ -e /file ]] && _double=$(cat < /file) ||  {
 _double=$(curl -sSL "https://raw.githubusercontent.com/kelokepe/scriptcgh/main/Control/Control-Bot.txt")

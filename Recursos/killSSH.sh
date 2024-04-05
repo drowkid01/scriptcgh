@@ -140,11 +140,11 @@ echo "$seg" > ${ADM}$user.time
 killerDROP () {
 user=$1 && limit=$2
 num=$(dropb | grep "$user" | wc -l)
-[[ $num -gt $limit ]] && {
-pidKILL=$(dropb | grep "$user" | awk '{print $2}')
-killing $pidKILL
-echo " $user DROPBEAR LIMITADO ${limit}/$num | $(printf '%(%D-%H:%M:%S)T') !" >> $HOME/limiter.log
-}
+ [[ $num -gt $limit ]] && {
+ pidKILL=$(dropb | grep "$user" | awk '{print $2}')
+ killing $pidKILL
+ echo " $user DROPBEAR LIMITADO ${limit}/$num | $(printf '%(%D-%H:%M:%S)T') !" >> $HOME/limiter.log
+ }
 }
 
 killerSSH () {

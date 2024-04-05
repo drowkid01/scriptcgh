@@ -1,6 +1,4 @@
 #!/bin/sh
-#Autor: Henry Chumo 
-#Alias : ChumoGH
 config="/etc/v2ray/config.json"
 temp="/etc/v2ray/temp.json"
 v2rdir="/etc/v2r" && [[ ! -d $v2rdir ]] && mkdir $v2rdir

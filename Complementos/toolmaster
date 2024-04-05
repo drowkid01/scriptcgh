@@ -18,8 +18,8 @@ def slowprint(s):
 banner = '''
                                                                                        
 ========= ToolMaster =======\033[91m
-========== @ChumoGH=========\033[92m
-======= Telegram @ChumoGH ====\033[96m
+========== @drowkid01 =========\033[92m
+======= Telegram @drowkid01 ====\033[96m
 '''
 print banner
 def menu():
