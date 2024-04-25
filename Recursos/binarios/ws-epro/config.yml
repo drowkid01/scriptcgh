@@ -1,0 +1,6 @@
+# verbose level 0=info, 1=verbose, 2=very verbose
+verbose: 0
+listen:
+- target_host: 127.0.0.1
+  target_port: abclocal
+  listen_port: abcws
